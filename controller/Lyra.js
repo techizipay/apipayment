@@ -125,12 +125,12 @@ const ReceiveIpn = async(req, res) => {
         hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
     )
 
-    const clave = 'GetvgxK3Vs4jXirU';  
-
-    let base64 = crypto.createHmac('sha256', clave).update(answer).digest("hex");
+    const answerHash2 = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer), 'YrU5Juy4elNZSwkQjPpiu8fJn3Pj0sILno1vruGzasX8P')
+    ) 
 
     console.log(answerHash);  
-    console.log(base64);  
+    console.log(answerHash2);  
 
     return res.status(200).json({
         ok:true,
