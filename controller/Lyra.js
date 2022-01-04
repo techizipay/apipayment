@@ -121,6 +121,8 @@ const ReceiveIpn = async(req, res) => {
     console.log(req.body['kr-answer']);  
 
     var answer = req.body['kr-answer'];
+    answer = answer.replace('\/', '/');
+
     const answerHash = Hex.stringify(
         hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
     )
