@@ -125,6 +125,8 @@ const ReceiveIpn = async(req, res) => {
         hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
     )
 
+    console.log(answerHash);  
+
     return res.status(200).json({
         ok:true,
         message: "Registrado Correctamente",
