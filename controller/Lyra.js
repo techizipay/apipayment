@@ -120,10 +120,15 @@ const ReceiveIpn = async(req, res) => {
     console.log(req.body['kr-answer-type']); 
     console.log(req.body['kr-answer']);  
 
+    var answer = req.body['kr-answer'];
+    const answerHash = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
+    )
+
     return res.status(200).json({
         ok:true,
         message: "Registrado Correctamente",
-        data: req.body
+        data: answerHash
     });
 }
 
