@@ -121,6 +121,7 @@ const ReceiveIpn = async(req, res) => {
     console.log(req.body['kr-answer']);  
 
     var answer = req.body['kr-answer'];
+    answer =  answer.toString("utf8");
     answer = answer.replace('\/', '/');
 
     const answerHash = Hex.stringify(
