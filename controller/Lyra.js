@@ -2,7 +2,9 @@ const { json } = require('body-parser');
 const fetch = require("node-fetch");
 var crypto = require('crypto');
 const hmacSHA256 = require('crypto-js/hmac-sha256')
-const Hex = require('crypto-js/enc-hex')
+const Hex = require('crypto-js/enc-hex');
+const { clearScreenDown } = require('readline');
+const { CLIENT_RENEG_LIMIT } = require('tls');
 
 // crear la preferencia de mercado pago
 const CreatePayment = async(req, res)=>{
@@ -92,9 +94,12 @@ const CreateToken = async(req, res)=>{
 
 const ReceiveIpn = async(req, res) => {
 
+
     const utf8 = require('utf8');
 
+    
     var answer = utf8.encode(req.body['kr-answer']); 
+    console.log(answer);
     answer = answer.replace('\/', '/');
 
     const answerHash = Hex.stringify(
