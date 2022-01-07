@@ -114,14 +114,9 @@ const CreateToken = async(req, res)=>{
 }
 
 const ReceiveIpn = async(req, res) => {
-    console.log(req.body['kr-hash']); 
-    console.log(req.body['kr-hash-algorithm']); 
-    console.log(req.body['kr-hash-key']); 
-    console.log(req.body['kr-answer-type']); 
-    console.log(req.body['kr-answer']);  
 
-    var answer = req.body['kr-answer'];
-    answer =  answer.toString("utf8");
+   
+    var answer = req.body['kr-answer']; 
     answer = answer.replace('\/', '/');
 
     const answerHash = Hex.stringify(
@@ -130,10 +125,10 @@ const ReceiveIpn = async(req, res) => {
 
     const answerHash2 = Hex.stringify(
         hmacSHA256(answer, 'YrU5Juy4elNZSwkQjPpiu8fJn3Pj0sILno1vruGzasX8P')
-    ) 
+    )  
 
     console.log(answerHash);  
-    console.log(answerHash2);  
+    console.log(answerHash2);   
 
     return res.status(200).json({
         ok:true,
