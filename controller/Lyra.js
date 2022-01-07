@@ -126,7 +126,7 @@ const ReceiveIpn = async(req, res) => {
     const answerHash2 = Hex.stringify(
         hmacSHA256(answer, 'YrU5Juy4elNZSwkQjPpiu8fJn3Pj0sILno1vruGzasX8P')
     )  
-
+    console.log(req.body['hash']);  
     console.log(answerHash);  
     console.log(answerHash2);   
 
