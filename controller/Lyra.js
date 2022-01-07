@@ -104,9 +104,16 @@ const ReceiveIpn = async(req, res) => {
     const answerHash2 = Hex.stringify(
         hmacSHA256(JSON.stringify(answer), 'YrU5Juy4elNZSwkQjPpiu8fJn3Pj0sILno1vruGzasX8P')
     )  
+
+    const answerHash3 = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer), 'testpassword_gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
+    )  
+
+
     console.log(req.body['kr-hash']);  
     console.log(answerHash);  
     console.log(answerHash2);   
+    console.log(answerHash3);   
 
     return res.status(200).json({
         ok:true,
