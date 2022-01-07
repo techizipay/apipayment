@@ -100,7 +100,7 @@ const ReceiveIpn = async(req, res) => {
     
     var answer = utf8.encode(req.body['kr-answer']); 
     console.log(answer);
-    answer = answer.replace('\/', '/');
+    answer = answer.replace('/','\/');
 
     const answerHash = Hex.stringify(
         hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
@@ -113,17 +113,12 @@ const ReceiveIpn = async(req, res) => {
     const answerHash3 = Hex.stringify(
         hmacSHA256(JSON.stringify(answer), 'testpassword_gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
     )  
-
-    const answerHash4 = Hex.stringify(
-        hmacSHA256(JSON.stringify(answer), 'gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
-    )  
-    
+ 
 
     console.log(req.body['kr-hash']);  
     console.log(answerHash);  
     console.log(answerHash2);   
-    console.log(answerHash3);   
-    console.log(answerHash4);   
+    console.log(answerHash3);    
 
     return res.status(200).json({
         ok:true,
