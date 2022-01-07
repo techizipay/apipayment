@@ -65,15 +65,7 @@ const CreatePaymentAut = async(req, res)=>{
         ok:true
     }) 
 }
- 
-unescapeBase64Url = function (key) {
-    return key.replace(/-/g, '+').replace(/_/g, '/');
-}
-
-escapeBase64Url = function (key) {
-    return key.replace(/\+/g, '-').replace(/\//g, '_');
-} 
-
+  
 const CreateToken = async(req, res)=>{
     var order = req.body; 
 
@@ -100,8 +92,9 @@ const CreateToken = async(req, res)=>{
 
 const ReceiveIpn = async(req, res) => {
 
-   
-    var answer = escapeBase64Url(req.body['kr-answer']); 
+    const utf8 = require('utf8');
+
+    var answer = utf8.encode(req.body['kr-answer']); 
     answer = answer.replace('\/', '/');
 
     const answerHash = Hex.stringify(
