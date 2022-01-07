@@ -118,7 +118,6 @@ const ReceiveIpn = async(req, res) => {
 
 module.exports = {
     CreatePayment,
-    CreatePaymentAut,
-    validarHash,
+    CreatePaymentAut, 
     ReceiveIpn
 }
