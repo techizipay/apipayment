@@ -72,22 +72,7 @@ unescapeBase64Url = function (key) {
 
 escapeBase64Url = function (key) {
     return key.replace(/\+/g, '-').replace(/\//g, '_');
-}
-
-const validarHash = async(req, res)=>{  
-    const hash = req.body.hash  
-    var answer = req.body.answer 
-    const answerHash = Hex.stringify(
-        hmacSHA256(JSON.stringify(answer), 'testpassword_gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
-    )
-    
-    console.log(answerHash); 
-    return res.json({
-        ok:true
-    })
-  
-}
-
+} 
 
 const CreateToken = async(req, res)=>{
     var order = req.body; 
@@ -116,7 +101,7 @@ const CreateToken = async(req, res)=>{
 const ReceiveIpn = async(req, res) => {
 
    
-    var answer = req.body['kr-answer']; 
+    var answer = escapeBase64Url(req.body['kr-answer']); 
     answer = answer.replace('\/', '/');
 
     const answerHash = Hex.stringify(
