@@ -97,6 +97,8 @@ const ReceiveIpn = async(req, res) => {
 
     const utf8 = require('utf8');
 
+    var answer2 = '{\"shopId\":\"37286286\",\"orderCycle\":\"CLOSED\",\"orderStatus\":\"PAID\",\"serverDate\":\"2022-01-07T19:41:11+00:00\",\"orderDetails\":{\"orderTotalAmount\":18000,\"orderEffectiveAmount\":18000,\"orderCurrency\":\"PEN\",\"mode\":\"TEST\",\"orderId\":\"myOrderId-8888\",\"metadata\":null,\"_type\":\"V4\/OrderDetails\"},\"customer\":{\"billingDetails\":{\"address\":null,\"category\":null,\"cellPhoneNumber\":null,\"city\":null,\"country\":null,\"district\":null,\"firstName\":null,\"identityCode\":null,\"language\":\"ES\",\"lastName\":null,\"phoneNumber\":null,\"state\":null,\"streetNumber\":null,\"title\":null,\"zipCode\":null,\"legalName\":null,\"_type\":\"V4\/Customer\/BillingDetails\"},\"email\":\"sample@example.com\",\"reference\":null,\"shippingDetails\":{\"address\":null,\"address2\":null,\"category\":null,\"city\":null,\"country\":null,\"deliveryCompanyName\":null,\"district\":null,\"firstName\":null,\"identityCode\":null,\"lastName\":null,\"legalName\":null,\"phoneNumber\":null,\"shippingMethod\":null,\"shippingSpeed\":null,\"state\":null,\"streetNumber\":null,\"zipCode\":null,\"_type\":\"V4\/Customer\/ShippingDetails\"},\"extraDetails\":{\"browserAccept\":null,\"fingerPrintId\":null,\"ipAddress\":\"161.69.121.37\",\"browserUserAgent\":\"Mozilla\/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit\/537.36+(KHTML,+like+Gecko)+Chrome\/96.0.4664.110+Safari\/537.36\",\"_type\":\"V4\/Customer\/ExtraDetails\"},\"shoppingCart\":{\"insuranceAmount\":null,\"shippingAmount\":null,\"taxAmount\":null,\"cartItemInfo\":null,\"_type\":\"V4\/Customer\/ShoppingCart\"},\"_type\":\"V4\/Customer\/Customer\"},\"transactions\":[{\"shopId\":\"37286286\",\"uuid\":\"7f9c8c2d130646b29f5dd5198af932ed\",\"amount\":18000,\"currency\":\"PEN\",\"paymentMethodType\":\"CARD\",\"paymentMethodToken\":null,\"status\":\"PAID\",\"detailedStatus\":\"AUTHORISED\",\"operationType\":\"DEBIT\",\"effectiveStrongAuthentication\":\"DISABLED\",\"creationDate\":\"2022-01-07T19:41:09+00:00\",\"errorCode\":null,\"errorMessage\":null,\"detailedErrorCode\":null,\"detailedErrorMessage\":null,\"metadata\":null,\"transactionDetails\":{\"liabilityShift\":\"NO\",\"effectiveAmount\":18000,\"effectiveCurrency\":\"PEN\",\"creationContext\":\"CHARGE\",\"cardDetails\":{\"paymentSource\":\"EC\",\"manualValidation\":\"NO\",\"expectedCaptureDate\":\"2022-01-07T19:41:09+00:00\",\"effectiveBrand\":\"VISA\",\"pan\":\"497010XXXXXX0055\",\"expiryMonth\":12,\"expiryYear\":2025,\"country\":\"PE\",\"issuerCode\":null,\"issuerName\":null,\"effectiveProductCode\":\"F\",\"legacyTransId\":\"913019\",\"legacyTransDate\":\"2022-01-07T19:41:09+00:00\",\"paymentMethodSource\":\"NEW\",\"authorizationResponse\":{\"amount\":18000,\"currency\":\"PEN\",\"authorizationDate\":\"2022-01-07T19:41:10+00:00\",\"authorizationNumber\":\"3fe678\",\"authorizationResult\":\"0\",\"authorizationMode\":\"FULL\",\"_type\":\"V4\/PaymentMethod\/Details\/Cards\/CardAuthorizationResponse\"},\"captureResponse\":{\"refundAmount\":null,\"refundCurrency\":null,\"captureDate\":null,\"captureFileNumber\":null,\"effectiveRefundAmount\":null,\"effectiveRefundCurrency\":null,\"_type\":\"V4\/PaymentMethod\/Details\/Cards\/CardCaptureResponse\"},\"threeDSResponse\":{\"authenticationResultData\":{\"transactionCondition\":null,\"enrolled\":null,\"status\":null,\"eci\":null,\"xid\":null,\"cavvAlgorithm\":null,\"cavv\":null,\"signValid\":null,\"brand\":null,\"_type\":\"V4\/PaymentMethod\/Details\/Cards\/CardAuthenticationResponse\"},\"_type\":\"V4\/PaymentMethod\/Details\/Cards\/ThreeDSResponse\"},\"authenticationResponse\":null,\"installmentNumber\":0,\"installmentCode\":\"0\",\"markAuthorizationResponse\":{\"amount\":null,\"currency\":null,\"authorizationDate\":null,\"authorizationNumber\":null,\"authorizationResult\":null,\"_type\":\"V4\/PaymentMethod\/Details\/Cards\/MarkAuthorizationResponse\"},\"cardHolderName\":null,\"identityDocumentNumber\":null,\"identityDocumentType\":null,\"_type\":\"V4\/PaymentMethod\/Details\/CardDetails\"},\"acquirerDetails\":null,\"fraudManagement\":{\"riskControl\":[],\"riskAnalysis\":[{\"score\":\"22.0\",\"resultCode\":\"ACCEPT\",\"status\":\"P_SEND_OK\",\"requestId\":\"6415844701466345804009\",\"extraInfo\":[{\"key\":\"analysisProfile\",\"value\":\"izipay_high\",\"_type\":\"V4\/PaymentMethod\/Details\/Risk\/ExtInfo\"},{\"key\":\"mddSubProduct\",\"value\":\"03\",\"_type\":\"V4\/PaymentMethod\/Details\/Risk\/ExtInfo\"}],\"fingerPrintId\":null,\"_type\":\"V4\/PaymentMethod\/Details\/Risk\/RiskAnalysis\"}],\"riskAssessments\":null,\"_type\":\"V4\/PaymentMethod\/Details\/FraudManagement\"},\"subscriptionDetails\":{\"subscriptionId\":null,\"_type\":\"V4\/PaymentMethod\/Details\/SubscriptionDetails\"},\"parentTransactionUuid\":null,\"mid\":\"3728628\",\"sequenceNumber\":1,\"taxAmount\":null,\"preTaxAmount\":null,\"taxRate\":null,\"externalTransactionId\":\"156732\",\"dcc\":null,\"nsu\":null,\"tid\":null,\"acquirerNetwork\":\"PROCESOS_ISO\",\"taxRefundAmount\":null,\"userInfo\":\"JS+Client\",\"paymentMethodTokenPreviouslyRegistered\":null,\"occurrenceType\":\"UNITAIRE\",\"_type\":\"V4\/TransactionDetails\"},\"_type\":\"V4\/PaymentTransaction\"}],\"subMerchantDetails\":null,\"_type\":\"V4\/Payment\"}';
+
     
     var answer = utf8.encode(req.body['kr-answer']); 
     console.log(answer);
@@ -114,11 +116,26 @@ const ReceiveIpn = async(req, res) => {
         hmacSHA256(JSON.stringify(answer), 'testpassword_gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
     )  
  
+    const answerHashE = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer2), 'GetvgxK3Vs4jXirU')
+    )
+
+    const answerHashE2 = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer2), 'YrU5Juy4elNZSwkQjPpiu8fJn3Pj0sILno1vruGzasX8P')
+    )  
+
+    const answerHashE3 = Hex.stringify(
+        hmacSHA256(JSON.stringify(answer2), 'testpassword_gXFxkEiT3k0dDXcbqO7TxRxtGggVEX9vuFz2Xq2jFvbxj')
+    )  
 
     console.log(req.body['kr-hash']);  
     console.log(answerHash);  
     console.log(answerHash2);   
     console.log(answerHash3);    
+
+    console.log(answerHashE);  
+    console.log(answerHashE2);   
+    console.log(answerHashE3);   
 
     return res.status(200).json({
         ok:true,
