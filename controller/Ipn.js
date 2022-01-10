@@ -32,13 +32,31 @@ const ReceiveIpn = async(req, res) => {
         });
     })
     .catch(error => {
-        return res.status(400).json({
+        return res.status(500).json({
             ok:false,
             message: "Hubo un error al registrar la transacción",
             data: null
         });
     })
- 
+}
+
+
+const DevolverIpn = async(req,res) => {
+    try{
+        let resultado = await Transaccion.findAll();
+        return res.status(200).json({
+            ok:true,
+            message: null,
+            data: resultado
+        });
+    }catch(error){
+        return res.status(500).json({
+            ok:false,
+            message: "Hubo un error al obtener las transacciones",
+            data: null
+        });
+    }
+
 }
 
 module.exports = { 
