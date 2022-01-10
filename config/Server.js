@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {conexion} = require('./Sequelize');
 const lyra_router = require('../routes/lyra');
 
 class Server{
@@ -36,6 +37,10 @@ class Server{
     start(){
         this.app.listen(this.puerto,()=>{
             console.log("Servidor corriendo exitosamente");
+
+            conexion.sync({force:false, alter:true}).then(() => {
+                console.log('BD sincronizada correctamente');
+            })
         })
     } 
 
