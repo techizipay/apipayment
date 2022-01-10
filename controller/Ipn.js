@@ -19,7 +19,7 @@ const ReceiveIpn = async(req, res) => {
     let validacion = answerHash == req.body['kr-hash'] ? 'Validación Correcta' : 'Validación Incorrecta';
 
     console.log( req.body['kr-answer']);
-    console.log( JSON.parse(req.body['kr-answer'])['transactions']);
+    console.log( JSON.parse(req.body['kr-answer'])['transactions'][0]['uuid']);
 
     return res.status(200).json({
         ok:true,
