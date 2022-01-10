@@ -97,7 +97,7 @@ const ReceiveIpn = async(req, res) => {
 
     const utf8 = require('utf8');
  
-    var answer = utf8.encode(req.body['kr-answer']);  
+    var answer = req.body['kr-answer'];  
  
     const answerHash = Hex.stringify(
         hmacSHA256(JSON.stringify(answer), 'GetvgxK3Vs4jXirU')
@@ -112,9 +112,9 @@ const ReceiveIpn = async(req, res) => {
     )  
   
     console.log(req.body['kr-hash']);  
-    console.log(answerHash);  
-    console.log(answerHash2);   
-    console.log(answerHash3);     
+    console.log(utf8.encode(answerHash));  
+    console.log(utf8.encode(answerHash2));  
+    console.log(utf8.encode(answerHash3));   
 
     return res.status(200).json({
         ok:true,
