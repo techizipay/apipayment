@@ -41,7 +41,7 @@ const ReceiveIpn = async(req, res) => {
 }
 
 
-const DevolverIpn = async(req,res) => {
+const ShowIpn = async(req,res) => {
     try{
         let resultado = await Transaccion.findAll();
         return res.status(200).json({
@@ -60,5 +60,6 @@ const DevolverIpn = async(req,res) => {
 }
 
 module.exports = { 
-    ReceiveIpn
+    ReceiveIpn,
+    ShowIpn
 }
