@@ -4,7 +4,7 @@ var crypto = require('crypto');
 const hmacSHA256 = require('crypto-js/hmac-sha256')
 const Hex = require('crypto-js/enc-hex');
 
-const Transaccion = require('../config/Sequelize');
+const {Transaccion} = require('../config/Sequelize');
 
 const ReceiveIpn = async(req, res) => {
  
