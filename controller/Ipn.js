@@ -17,37 +17,27 @@ const ReceiveIpn = async(req, res) => {
     )  
   
     let validacion = answerHash == req.body['kr-hash'] ? 'Validación Correcta' : 'Validación Incorrecta';
-
-    console.log( req.body['kr-answer']);
-    console.log( JSON.parse(req.body['kr-answer'])['transactions'][0]['uuid']);
-
-    return res.status(200).json({
-        ok:true,
-        message: "Registrado Correctamente",
-        data: answerHash
-    });
-
-     
-    // let nuevaTransaccion = Transaccion.create({
-    //     transaccionUUID: req.body['kr-answer']['transactions'][0]['uuid'],
-    //     transaccionHash: req.body['kr-hash'],
-    //     transaccionAnswer: req.body['kr-answer'],
-    //     transaccionValidacion: validacion
-    // })
-    // .then(usuario => {
-    //     return res.status(200).json({
-    //         ok:true,
-    //         message: "Registrado Correctamente",
-    //         data: answerHash
-    //     });
-    // })
-    // .catch(error => {
-    //     return res.status(400).json({
-    //         ok:false,
-    //         message: "Hubo un error al registrar la transacción",
-    //         data: null
-    //     });
-    // })
+  
+    let nuevaTransaccion = Transaccion.create({
+        transaccionUUID: JSON.parse(req.body['kr-answer'])['transactions'][0]['uuid'],
+        transaccionHash: req.body['kr-hash'],
+        transaccionAnswer: req.body['kr-answer'],
+        transaccionValidacion: validacion
+    })
+    .then(usuario => {
+        return res.status(200).json({
+            ok:true,
+            message: "Registrado Correctamente",
+            data: answerHash
+        });
+    })
+    .catch(error => {
+        return res.status(400).json({
+            ok:false,
+            message: "Hubo un error al registrar la transacción",
+            data: null
+        });
+    })
  
 }
 
