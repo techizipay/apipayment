@@ -18,13 +18,13 @@ const ReceiveIpn = async(req, res) => {
   
     let validacion = answerHash == req.body['kr-hash'] ? 'Validación Correcta' : 'Validación Incorrecta';
   
-    let nuevaTransaccion = Transaccion.create({
+    let nuevaTransaccion = await Transaccion.create({
         transaccionUUID: JSON.parse(req.body['kr-answer'])['transactions'][0]['uuid'],
         transaccionHash: req.body['kr-hash'],
         transaccionAnswer: req.body['kr-answer'],
         transaccionValidacion: validacion
     })
-    .then(usuario => {
+    .then(transaccion => {
         return res.status(200).json({
             ok:true,
             message: "Registrado Correctamente",
