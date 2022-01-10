@@ -6,5 +6,5 @@ var lyra_router = Router();
 lyra_router.post('/createpayment', lyraController.CreatePayment); 
 lyra_router.post('/createpaymentaut', lyraController.CreatePaymentAut);  
 lyra_router.post('/getipn', IpnController.ReceiveIpn); 
-lyra_router.post('/showipn', IpnController.ShowIpn); 
+lyra_router.get('/showipn', IpnController.ShowIpn); 
 module.exports = lyra_router;
