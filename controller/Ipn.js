@@ -52,7 +52,7 @@ const ShowIpn = async(req,res) => {
     }catch(error){
         return res.status(500).json({
             ok:false,
-            message: "Hubo un error al obtener las transacciones",
+            message: "Hubo un error al obtener las transacciones: " + error,
             data: null
         });
     }
